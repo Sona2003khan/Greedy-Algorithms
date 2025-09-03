@@ -1,0 +1,35 @@
+import java.util.Arrays;
+
+public class Greedy_assign_cookies_1 {
+
+    public static int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        int n = g.length;
+        int m = s.length;
+
+        int i=0;
+        int j=0;
+
+        while(i < n && j < m){
+            if(g[i] <= s[j]){
+                i++;
+            }
+            j++;
+        }
+        return i;
+    }
+
+    public static void main(String[] args) {
+        int g[] = {1,2};
+        int s[] = {1,2,3};
+
+        int result = findContentChildren(g, s);
+        System.out.println(result);
+    }
+    
+}
+
+// Time Complexity: O(n log n + m log m) due to sorting both arrays
+// Space Complexity: O(1) (ignoring sort’s internal stack, algorithm uses constant extra space)
