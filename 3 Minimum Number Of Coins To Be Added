@@ -1,0 +1,35 @@
+import java.util.Arrays;
+
+public class Greedy_min_no_of_coins_3 {
+
+    public static int minimumAddedCoins(int[] coins, int target) {
+
+        Arrays.sort(coins);
+        int n=coins.length;
+        int count=0;
+        long reached = 1; 
+        int i = 0;
+
+        while(reached <= target){
+            if(i < n && coins[i] <= reached){
+                reached += coins[i];
+                i++;
+            }
+            else{
+                reached += reached;
+                count++;
+            }
+        }
+
+        return count;
+    }
+    public static void main(String[] args) {
+        int coins[] = {1,4,10};
+        int target = 19;
+        int result = minimumAddedCoins(coins, target);
+        System.out.println(result);
+    }
+}
+
+// Time Complexity: O(n log n) due to sorting the coins array.
+// Space Complexity: O(1) since only constant extra space is used.
