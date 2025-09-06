@@ -7,17 +7,11 @@ public class Greedy_min_no_of_coins_3 {
         Arrays.sort(coins);
         int n=coins.length;
         int count=0;
-        long reached = 1; 
-        int i = 0;
 
-        while(reached <= target){
-            if(i < n && coins[i] <= reached){
-                reached += coins[i];
-                i++;
-            }
-            else{
-                reached += reached;
+        for(int i=n-1 ; i>=0; i--){
+            while(coins[i] <= target){
                 count++;
+                target -= coins[i];
             }
         }
 
