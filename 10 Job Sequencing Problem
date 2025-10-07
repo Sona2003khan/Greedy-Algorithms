@@ -1,0 +1,57 @@
+import java.util.Arrays;
+
+public class Greedy_job_sequencing_problem_10 {
+
+    public static int job_max_profit(int job[][]){
+
+        int n= job.length;
+
+        Arrays.sort(job, (a, b) -> b[2] - a[2]);
+
+        int max_deadline=0;
+        int count=0;
+        int max_profit=0;
+
+        for(int i=0;i<job.length;i++){
+            if(job[i][1] > max_deadline){
+                max_deadline = job[i][1];
+            }
+        }
+
+        int slot[]=new int[max_deadline+1];
+        Arrays.fill(slot, -1);
+
+        for(int i=0;i<n;i++){
+            int job_id=job[i][0];
+            int job_deadline=job[i][1];
+            int job_profit=job[i][2];
+
+            for(int j=job_deadline;j>0;j--){
+                if(slot[j] == -1){
+                    slot[j]=job_id;
+                    count++;
+                    max_profit += job_profit;
+                    break;
+                }
+            }
+        }
+        return max_profit;
+    }
+
+    public static void main(String[] args) {
+        int job[][]={{6,2,80},
+        {3,6,70},
+        {4,6,65},
+        {2,5,60},
+        {5,4,25},
+        {8,2,22},
+        {1,4,20},
+        {7,2,10}};
+
+        int result = job_max_profit(job);
+        System.out.println(result);
+    }
+}
+
+//Time Complexity: O(n log n + n * D)
+//Space Complexity: O(D)
